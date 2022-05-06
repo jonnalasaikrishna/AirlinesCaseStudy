@@ -1,4 +1,5 @@
 ﻿using CommonDAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,7 +18,8 @@ namespace AirlinesAdminUser.Controllers
         {
             _flightBookingDBContext = flightBookingDBContext;
         }
-        
+
+        [Authorize]
         [HttpGet("GetAdminData")]
         
         public IActionResult GetAdminData()

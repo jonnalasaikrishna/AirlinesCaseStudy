@@ -1,4 +1,5 @@
 ﻿using CommonDAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,6 +37,8 @@ namespace AirlineInventory.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
         [HttpPost("InsertInventryDetails")]
         public IActionResult InsertUser(InventoryDetail InventoryData)
         {
@@ -51,6 +54,8 @@ namespace AirlineInventory.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
         [HttpPost]
         [Route("search-inventories")]
         public IActionResult GetAllInventories(InventoryDetail serachInventory)

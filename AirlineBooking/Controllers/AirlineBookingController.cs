@@ -1,4 +1,5 @@
 ﻿using CommonDAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,8 +20,10 @@ namespace AirlineBooking.Controllers
             _flightBookingDBContext = flightBookingDBContext;
         }
 
-       // To get Booking details
-       [HttpGet("GetBookingDetails")]
+        // To get Booking details
+
+        [Authorize]
+        [HttpGet("GetBookingDetails")]
 
         public IActionResult GetBookingData()
         {
@@ -38,6 +41,8 @@ namespace AirlineBooking.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
         [HttpPost("InsertBookindDetails")]
         public IActionResult InsertUser(BookingDetail BookingData)
         {
@@ -113,7 +118,7 @@ namespace AirlineBooking.Controllers
         //    }
 
         //}
-        ///// <summary>
+        ///// <summary> bgfmnvdddddddddddd
         ///// Genarate unique Booking iD
         ///// </summary>
         ///// <returns></returns>
@@ -165,6 +170,8 @@ namespace AirlineBooking.Controllers
         /// </summary>
         /// <param name="TicketID"></param>
         /// <returns></returns>
+      
+        [Authorize]
         [HttpPut]
         [Route("cancel-ticket/{TicketID}")]
         public IActionResult CancelTicket(string TicketID)
@@ -179,8 +186,10 @@ namespace AirlineBooking.Controllers
                     using (var scope = new TransactionScope())
                     {
                         _flightBookingDBContext.Update(booking);
-                        scope.Complete();
+                        
+                        _flightBookingDBContext.SaveChanges();
 
+                        scope.Complete();
                     }
                 }
                 return new OkObjectResult(bookings);
@@ -195,6 +204,8 @@ namespace AirlineBooking.Controllers
         /// </summary>
         /// <param name="TicketID"></param>
         /// <returns></returns>
+        /// 
+        [Authorize]
         [HttpGet]
         [Route("pnr-ticket/{TicketID}")]
         public IActionResult GetpnrTicket(string TicketID)

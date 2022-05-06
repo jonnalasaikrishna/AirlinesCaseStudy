@@ -1,4 +1,5 @@
 ﻿using CommonDAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +19,7 @@ namespace AirlineUserRegistation.Controllers
             _flightBookingDBContext = flightBookingDBContext;
         }
 
+        [Authorize]
         [HttpGet("GetUserDetails")]
 
         public IActionResult GetUserData()
@@ -36,6 +38,8 @@ namespace AirlineUserRegistation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
         [HttpPost("InsertUserDetails")]
         public IActionResult InsertUser(UserRegister UserData)
         {
