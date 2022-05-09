@@ -1,5 +1,6 @@
 using AirlineAuthentication.Interface;
 using AirlineAuthentication.Models;
+using CommonDAL.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,7 @@ namespace AirlineAuthentication
             services.AddControllers();
             services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
             services.AddSwaggerGen();
+            services.AddTransient<FlightBookingDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

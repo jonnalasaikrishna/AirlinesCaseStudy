@@ -19,6 +19,7 @@ namespace CommonDAL.Models
 
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<AirlineDetail> AirlineDetails { get; set; }
+        public virtual DbSet<AuthenticateUser> AuthenticateUsers { get; set; }
         public virtual DbSet<BookingDetail> BookingDetails { get; set; }
         public virtual DbSet<FlightDetail> FlightDetails { get; set; }
         public virtual DbSet<InventoryDetail> InventoryDetails { get; set; }
@@ -83,6 +84,21 @@ namespace CommonDAL.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("date");
+            });
+
+            modelBuilder.Entity<AuthenticateUser>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<BookingDetail>(entity =>
@@ -268,6 +284,11 @@ namespace CommonDAL.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("password");
             });
 
             OnModelCreatingPartial(modelBuilder);

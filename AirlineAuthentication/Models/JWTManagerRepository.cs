@@ -13,11 +13,11 @@ namespace AirlineAuthentication.Models
 {
     public class JWTManagerRepository : IJWTManagerRepository
     {
-        Dictionary<string, string> UserRecords = new Dictionary<string, string>
-        {
-            { "user1","password1"},
-             { "user2","password2"}
-        };
+        //Dictionary<string, string> UserRecords = new Dictionary<string, string>
+        //{
+        //    { "user1","password1"},
+        //     { "user2","password2"}
+        //};
 
         private readonly IConfiguration configuartion;
 
@@ -29,10 +29,10 @@ namespace AirlineAuthentication.Models
 
         public Tokens Authenticate(Users users)
         {
-            if (!UserRecords.Any(x => x.Key == users.Name && x.Value == users.Password))
-            {
-                return null;
-            }
+            //if (!UserRecords.Any(x => x.Key == users.Name && x.Value == users.Password))
+            //{
+            //    return null;
+            //}
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.UTF8.GetBytes(configuartion["JWT:Key"]);
